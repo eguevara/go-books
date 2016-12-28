@@ -39,10 +39,11 @@ if err != nil {
 }
 
 opts := &gobooks.AnnotationsListOptions{
-    VolumeID:       gobooks.String("volumeId"),
-    ContentVersion: gobooks.String("version"),
-    LayerID:        gobooks.String("notes"),
-    Source:         gobooks.String("app"),
+    VolumeID:       "volumeId",
+    ContentVersion: "version",
+    LayerID:        "notes",
+    Source:         "app",
+	Fields:         "items(layerId,selectedText,volumeId),totalItems",
 }
 
 list, _, err := client.Annotations.List(opts)

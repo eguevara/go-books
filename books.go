@@ -71,6 +71,9 @@ type ErrorItem struct {
 	Message string `json:"message"`
 }
 
+// addOptions adds the parameters in opt as URL query parameters to s.
+// opt must be a struct whose fields may contain "url" tags.
+// all parameters passed as s will be replaced by options in opt.
 func addOptions(s string, opt interface{}) (string, error) {
 	v := reflect.ValueOf(opt)
 	if v.Kind() == reflect.Ptr && v.IsNil() {

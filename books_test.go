@@ -293,3 +293,88 @@ func TestNewRequest_emptyBody(t *testing.T) {
 		t.Fatalf("constructed request contains a non-nil Body")
 	}
 }
+
+func TestAddOptions(t *testing.T) {
+	cases := []struct {
+		name     string
+		path     string
+		expected string
+		opts     *AnnotationsListOptions
+		isErr    bool
+	}{
+		{
+			name:     "add options",
+			path:     "/annotations",
+			expected: "/annotations?volumeId=1",
+			opts:     &AnnotationsListOptions{VolumeID: "1"},
+			isErr:    false,
+		},
+		{
+			name:     "add options with existing parameters",
+			path:     "/annotations?source=all&maxResults=10",
+			expected: "/annotations?volumeId=1&maxResults=40",
+			opts:     &AnnotationsListOptions{VolumeID: "1", MaxResults: 40},
+			isErr:    false,
+		},
+		{
+			name:     "bad url string to parse",
+			path:     ":",
+			expected: ":",
+			opts:     &AnnotationsListOptions{VolumeID: "1", MaxResults: 40},
+			isErr:    true,
+		},
+		{
+			name:     "opt set to nil.",
+			path:     "/annotations",
+			expected: "/annotations",
+			opts:     nil,
+			isErr:    false,
+		},
+	}
+
+	for _, c := range cases {
+		got, err := addOptions(c.path, c.opts)
+
+		if c.isErr && err == nil {
+			t.Errorf("%q expected error but none was encountered", c.name)
+			continue
+		}
+
+		if !c.isErr && err != nil {
+			t.Errorf("%q unexpected error: %v", c.name, err)
+			continue
+		}
+
+		if c.isErr {
+			continue
+		}
+
+		if c.opts == nil && err != nil {
+			t.Errorf("%q expected error to return nil: %v", c.name, err)
+		}
+
+		gotURL, err := url.Parse(got)
+		if err != nil {
+			t.Errorf("%q unable to parse returned URL", c.name)
+			continue
+		}
+
+		expectedURL, err := url.Parse(c.expected)
+		if err != nil {
+			t.Errorf("%q unable to parse expected URL", c.name)
+			continue
+		}
+
+		// Test for url path to be expected.
+		if g, e := gotURL.Path, expectedURL.Path; g != e {
+			t.Errorf("%q path = %q; expected %q", c.name, g, e)
+			continue
+		}
+
+		// Test for query values to be as expected.
+		if g, e := gotURL.Query(), expectedURL.Query(); !reflect.DeepEqual(g, e) {
+			t.Errorf("%q query = %#v; expected %#v", c.name, g, e)
+			continue
+		}
+	}
+}
