@@ -51,6 +51,9 @@ func (v *GoogleVolumesService) List(volumeID string, opt *VolumesListOptions) ([
 
 	url := fmt.Sprintf("mylibrary/bookshelves/%s/volumes", volumeID)
 	url, err := addOptions(url, opt)
+	if err != nil {
+		return nil, nil, err
+	}
 
 	req, err := v.client.NewRequest("GET", url, nil)
 	if err != nil {

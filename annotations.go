@@ -39,6 +39,9 @@ type AnnotationsListOptions struct {
 func (u *GoogleAnnotationsService) List(opt *AnnotationsListOptions) ([]Annotation, *Response, error) {
 	url := "mylibrary/annotations"
 	url, err := addOptions(url, opt)
+	if err != nil {
+		return nil, nil, err
+	}
 
 	req, err := u.client.NewRequest("GET", url, nil)
 	if err != nil {

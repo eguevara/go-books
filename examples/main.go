@@ -18,6 +18,19 @@ const (
 	impersonateEmail = "erick.guevara@gmail.com"
 )
 
+func exampleShelvesList(c *gobooks.Client) {
+	opts := &gobooks.ShelvesListOptions{}
+
+	shelves, _, err := c.Shelves.List(opts)
+	if err != nil {
+		log.Fatalf("error in List(): %v", err)
+	}
+
+	for _, v := range shelves {
+		fmt.Printf("Id: %d, Title: %v, VolumeCount: %d\n", v.ID, v.Title, v.VolumeCount)
+	}
+}
+
 func exampleVolumesList(c *gobooks.Client) {
 	opts := &gobooks.VolumesListOptions{
 		Fields:     "items(id,volumeInfo(contentVersion,title)),totalItems",
@@ -64,6 +77,7 @@ func main() {
 
 	exampleAnnotationsList(client)
 	exampleVolumesList(client)
+	exampleShelvesList(client)
 
 }
 
