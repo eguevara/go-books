@@ -34,8 +34,11 @@ type Client struct {
 	// User agent for client
 	UserAgent string
 
-	// Services used for talking to different parts of the books.mylibrary.annotations.list API.
+	// Services used to talk to books.mylibrary.annotations.list API.
 	Annotations AnnotationsService
+
+	// Service used to talk to books.mylibrary.bookshelves.volumes.list API.
+	Volumes VolumesService
 }
 
 // Response is a Google Books response. This wraps the standard http.Response returned from Google Books.
@@ -103,6 +106,7 @@ func NewClient(httpClient *http.Client) *Client {
 	baseURL, _ := url.Parse(defaultBaseURL)
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent}
 	c.Annotations = &GoogleAnnotationsService{client: c}
+	c.Volumes = &GoogleVolumesService{client: c}
 
 	return c
 }
