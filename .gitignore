@@ -160,4 +160,5 @@ _testmain.go
 .venv
 
 launch.json
-examples/
+
+*.pem
