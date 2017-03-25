@@ -27,7 +27,7 @@ func exampleShelvesList(c *books.Client) {
 	}
 
 	for _, v := range shelves {
-		fmt.Printf("Id: %d, Title: %v, VolumeCount: %d\n", v.ID, v.Title, v.VolumeCount)
+		fmt.Printf("Id: %d, Title: %v \n", *v.ID, *v.Title)
 	}
 }
 
@@ -43,7 +43,7 @@ func exampleVolumesList(c *books.Client) {
 	}
 
 	for _, v := range volumes {
-		fmt.Printf("VolumeId: %s, Title: %v, ContentVersion: %v\n", v.ID, v.Info.Title, v.Info.ContentVersion)
+		fmt.Printf("VolumeId: %s, Title: %v, ContentVersion: %v\n", *v.ID, *v.Info.Title, *v.Info.ContentVersion)
 	}
 }
 
@@ -63,7 +63,7 @@ func exampleAnnotationsList(c *books.Client) {
 	}
 
 	for idx, note := range list {
-		fmt.Printf("%d - %s\n\n", idx, note.SelectedText)
+		fmt.Printf("%d - %s\n\n", idx, *note.SelectedText)
 	}
 }
 

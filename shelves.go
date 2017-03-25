@@ -13,11 +13,11 @@ type GoogleShelvesService struct {
 // Shelf represents a Google Book Volume resource.
 // https://developers.google.com/books/docs/v1/reference/bookshelves#resource
 type Shelf struct {
-	ID          int    `json:"id"`
-	Title       string `json:"title"`
-	VolumeCount int    `json:"volumeCount"`
-	Description string `json:"description"`
-	Updated     string `json:"updated"`
+	ID          *int    `json:"id,omitempty"`
+	Title       *string `json:"title,omitempty"`
+	VolumeCount *int    `json:"volumeCount,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Updated     *string `json:"updated,omitempty"`
 }
 
 // shelvesRoot represents a response from Google Books API.

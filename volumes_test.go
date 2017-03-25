@@ -28,7 +28,8 @@ func TestVolumesList(t *testing.T) {
 		t.Errorf("List() returned an error: %v", err)
 	}
 
-	expected := []Volume{{ID: "VN2jCgAAAEAJ", Info: VolumeInfo{Title: "Go in Action", ContentVersion: "full-1.0.0"}}}
+	expectedVolumeInfo := &VolumeInfo{Title: String("Go in Action"), ContentVersion: String("full-1.0.0")}
+	expected := []Volume{{ID: String("VN2jCgAAAEAJ"), Info: expectedVolumeInfo}}
 
 	if !reflect.DeepEqual(list, expected) {
 		t.Errorf("List() returned %+v, expected %+v", list, expected)

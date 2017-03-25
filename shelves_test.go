@@ -23,7 +23,7 @@ func TestShelvesList(t *testing.T) {
 		t.Errorf("List() returned an error: %v", err)
 	}
 
-	expected := []Shelf{{ID: 7, Title: "My Google eBooks", VolumeCount: 13}, {ID: 1, Title: "Purchased", VolumeCount: 11}}
+	expected := []Shelf{{ID: Int(7), Title: String("My Google eBooks"), VolumeCount: Int(13)}, {ID: Int(1), Title: String("Purchased"), VolumeCount: Int(11)}}
 
 	if !reflect.DeepEqual(list, expected) {
 		t.Errorf("List() returned %+v, expected %+v", list, expected)

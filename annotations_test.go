@@ -27,7 +27,7 @@ func TestAnnotations_List(t *testing.T) {
 		t.Errorf("List() returned an error: %v", err)
 	}
 
-	expected := []Annotation{{VolumeID: "VN2jCgAAAEAJ", LayerID: "notes", SelectedText: "Go"}}
+	expected := []Annotation{{VolumeID: String("VN2jCgAAAEAJ"), LayerID: String("notes"), SelectedText: String("Go")}}
 
 	if !reflect.DeepEqual(list, expected) {
 		t.Errorf("List() returned %+v, expected %+v", list, expected)

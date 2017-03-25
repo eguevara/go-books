@@ -17,14 +17,14 @@ type GoogleVolumesService struct {
 
 // Volume represents a Google Book Volume resource.
 type Volume struct {
-	ID   string     `json:"id"`
-	Info VolumeInfo `json:"volumeInfo"`
+	ID   *string     `json:"id,omitempty"`
+	Info *VolumeInfo `json:"volumeInfo,omitempty"`
 }
 
 // VolumeInfo represents a google.book.volumes.volumeInfo
 type VolumeInfo struct {
-	Title          string `json:"title"`
-	ContentVersion string `json:"contentVersion"`
+	Title          *string `json:"title,omitempty"`
+	ContentVersion *string `json:"contentVersion,omitempty"`
 }
 
 // volumesRoot represents a response from Google Books API.

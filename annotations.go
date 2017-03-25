@@ -12,16 +12,16 @@ type GoogleAnnotationsService struct {
 
 // Annotation represents a Google Book Annotation resource.
 type Annotation struct {
-	SelectedText string `json:"selectedText"`
-	VolumeID     string `json:"VolumeID"`
-	ID           string `json:"id"`
-	LayerID      string `json:"layerId"`
+	SelectedText *string `json:"selectedText,omitempty"`
+	VolumeID     *string `json:"VolumeID,omitempty"`
+	ID           *string `json:"id,omitempty"`
+	LayerID      *string `json:"layerId,omitempty"`
 }
 
 // annotationRoot represents a response from Google Books API.
 type annotationRoot struct {
-	TotalItems  int          `json:"totalItems"`
-	Annotations []Annotation `json:"items"`
+	TotalItems  *int         `json:"totalItems,omitempty"`
+	Annotations []Annotation `json:"items,omitempty"`
 }
 
 // AnnotationsListOptions specifies the optional parameters needed for AnnotationsListOptions.
