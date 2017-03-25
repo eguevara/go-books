@@ -89,7 +89,7 @@ func getOAuthClient() *http.Client {
 
 	conf := &jwt.Config{
 		Email:      clientEmail,
-		PrivateKey: []byte(data),
+		PrivateKey: data,
 		Scopes: []string{
 			"https://www.googleapis.com/auth/books",
 		},
