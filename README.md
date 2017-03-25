@@ -1,14 +1,14 @@
-# Gobooks 
-Gobooks is a Go client library for accessing Google Books Annotations API.
+# go-books 
+go-books is a Go client library for accessing Google Books Annotations API.
 
 [https://developers.google.com/apis-explorer/?hl=en_US#s/books/v1/](https://developers.google.com/apis-explorer/?hl=en_US#s/books/v1/)
 
 ## Usage
 ```go
- import 	"github.com/eguevara/gobooks"
+ import 	"github.com/eguevara/go-books"
 ```
 
-## Authenication
+## Authentication
 
 OAuth2 http client is required to to access Google Books API on behalf of a user.
 
@@ -33,12 +33,12 @@ client := conf.Client(oauth2.NoContext)
 ## Examples
 
 ```go
-client, err := gobooks.New(oauthClient)
+client, err := books.New(oauthClient)
 if err != nil {
     log.Fatalf("http: error %v", err)
 }
 
-opts := &gobooks.AnnotationsListOptions{
+opts := &books.AnnotationsListOptions{
     VolumeID:       "volumeId",
     ContentVersion: "version",
     LayerID:        "notes",

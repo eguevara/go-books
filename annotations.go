@@ -1,4 +1,4 @@
-package gobooks
+package books
 
 // AnnotationsService defines the behavior required by types that want to implement a new Annotation type.
 type AnnotationsService interface {

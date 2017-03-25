@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/eguevara/gobooks"
+	"github.com/eguevara/go-books"
 
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
@@ -18,8 +18,8 @@ const (
 	impersonateEmail = "erick.guevara@gmail.com"
 )
 
-func exampleShelvesList(c *gobooks.Client) {
-	opts := &gobooks.ShelvesListOptions{}
+func exampleShelvesList(c *books.Client) {
+	opts := &books.ShelvesListOptions{}
 
 	shelves, _, err := c.Shelves.List(opts)
 	if err != nil {
@@ -31,8 +31,8 @@ func exampleShelvesList(c *gobooks.Client) {
 	}
 }
 
-func exampleVolumesList(c *gobooks.Client) {
-	opts := &gobooks.VolumesListOptions{
+func exampleVolumesList(c *books.Client) {
+	opts := &books.VolumesListOptions{
 		Fields:     "items(id,volumeInfo(contentVersion,title)),totalItems",
 		MaxResults: 1,
 	}
@@ -47,8 +47,8 @@ func exampleVolumesList(c *gobooks.Client) {
 	}
 }
 
-func exampleAnnotationsList(c *gobooks.Client) {
-	opts := &gobooks.AnnotationsListOptions{
+func exampleAnnotationsList(c *books.Client) {
+	opts := &books.AnnotationsListOptions{
 		VolumeID:       "VN2jCgAAAEAJ",
 		ContentVersion: "full-1.0.0",
 		LayerID:        "notes",
@@ -70,7 +70,7 @@ func exampleAnnotationsList(c *gobooks.Client) {
 func main() {
 
 	oauthClient := getOAuthClient()
-	client, err := gobooks.New(oauthClient)
+	client, err := books.New(oauthClient)
 	if err != nil {
 		log.Fatalf("http: error %v", err)
 	}

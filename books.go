@@ -1,4 +1,4 @@
-package gobooks
+package books
 
 import (
 	"bytes"

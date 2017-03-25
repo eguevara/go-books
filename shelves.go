@@ -1,4 +1,4 @@
-package gobooks
+package books
 
 // ShelvesService defines the behavior required by types that want to implement a new Shelf type.
 type ShelvesService interface {
