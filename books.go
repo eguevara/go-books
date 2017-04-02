@@ -151,6 +151,14 @@ func SetUserAgent(ua string) ClientOpt {
 	}
 }
 
+// SetToken is a client option for setting the oauth token.
+func SetToken(token string) ClientOpt {
+	return func(c *Client) error {
+		c.token = fmt.Sprintf("%s", token)
+		return nil
+	}
+}
+
 // NewRequest creates an API request. A relative URL can be provided in urlStr, which will be resolved to the
 // BaseURL of the Client. Relative URLS should always be specified without a preceding slash. If specified, the
 // value pointed to by body is JSON encoded and included in as the request body.
@@ -178,7 +186,14 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 
 	req.Header.Add("Content-Type", mediaType)
 	req.Header.Add("Accept", mediaType)
-	req.Header.Add("User-Agent", c.UserAgent)
+
+	if c.UserAgent != "" {
+		req.Header.Add("User-Agent", c.UserAgent)
+	}
+
+	if c.token != "" {
+		req.Header.Set("Authorization", "Bearer "+c.token)
+	}
 
 	// out, err := httputil.DumpRequestOut(req, true)
 	// if err != nil {
