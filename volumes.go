@@ -23,8 +23,15 @@ type Volume struct {
 
 // VolumeInfo represents a google.book.volumes.volumeInfo
 type VolumeInfo struct {
-	Title          *string `json:"title,omitempty"`
-	ContentVersion *string `json:"contentVersion,omitempty"`
+	Title          *string           `json:"title,omitempty"`
+	ContentVersion *string           `json:"contentVersion,omitempty"`
+	ImageLinks     *VolumeImageLinks `json:"imageLinks,omitempty"`
+}
+
+// VolumeImageLinks holds image information from the volume.
+type VolumeImageLinks struct {
+	SmallThumbnail *string `json:"smallThumbnail,omitempty"`
+	Thumbnail      *string `json:"thumbnail,omitempty"`
 }
 
 // volumesRoot represents a response from Google Books API.

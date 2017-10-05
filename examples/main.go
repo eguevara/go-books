@@ -33,7 +33,7 @@ func exampleShelvesList(c *books.Client) {
 
 func exampleVolumesList(c *books.Client) {
 	opts := &books.VolumesListOptions{
-		Fields:     "items(id,volumeInfo(contentVersion,title)),totalItems",
+		Fields:     "items(id,volumeInfo(contentVersion,title,imageLinks)),totalItems",
 		MaxResults: 1,
 	}
 
@@ -44,6 +44,8 @@ func exampleVolumesList(c *books.Client) {
 
 	for _, v := range volumes {
 		fmt.Printf("VolumeId: %s, Title: %v, ContentVersion: %v\n", *v.ID, *v.Info.Title, *v.Info.ContentVersion)
+		fmt.Println(*v.Info.ImageLinks.SmallThumbnail)
+		fmt.Println(*v.Info.ImageLinks.Thumbnail)
 	}
 }
 
