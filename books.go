@@ -47,6 +47,9 @@ type Client struct {
 // Response is a Google Books response. This wraps the standard http.Response returned from Google Books.
 type Response struct {
 	*http.Response
+
+	// NextPageToken is used on the response to fetch the next page.
+	NextPageToken string
 }
 
 // An ErrorResponse reports the error caused by an API request

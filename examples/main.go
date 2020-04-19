@@ -56,14 +56,17 @@ func exampleAnnotationsList(c *books.Client) {
 		LayerID:        "notes",
 		MaxResults:     1,
 		Source:         "ge-web-app1",
-		Fields:         "items(layerId,selectedText,volumeId),totalItems",
+		Fields:         "items(layerId,selectedText,volumeId),totalItems,nextPageToken",
 	}
 
-	list, _, err := c.Annotations.List(opts)
+	list, resp, err := c.Annotations.List(opts)
 	if err != nil {
 		log.Fatalf("error in list(): %v ", err)
 	}
 
+	if nextPage := resp.NextPageToken; nextPage != "" {
+		fmt.Printf("Next page Token :%v\n", nextPage)
+	}
 	for idx, note := range list {
 		fmt.Printf("%d - %s\n\n", idx, *note.SelectedText)
 	}

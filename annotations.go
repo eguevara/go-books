@@ -20,8 +20,9 @@ type Annotation struct {
 
 // annotationRoot represents a response from Google Books API.
 type annotationRoot struct {
-	TotalItems  *int         `json:"totalItems,omitempty"`
-	Annotations []Annotation `json:"items,omitempty"`
+	TotalItems    *int         `json:"totalItems,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
+	Annotations   []Annotation `json:"items,omitempty"`
 }
 
 // AnnotationsListOptions specifies the optional parameters needed for AnnotationsListOptions.
@@ -32,6 +33,7 @@ type AnnotationsListOptions struct {
 	Source         string `url:"source,omitempty"`
 	VolumeID       string `url:"volumeId,omitempty"`
 	Fields         string `url:"fields,omitempty"`
+	PageToken      string `url:"pageToken,omitempty"`
 }
 
 // List will call Annotation service with opts param.
@@ -52,6 +54,10 @@ func (u *GoogleAnnotationsService) List(opt *AnnotationsListOptions) ([]Annotati
 	resp, err := u.client.Do(req, root)
 	if err != nil {
 		return nil, resp, err
+	}
+
+	if n := root.NextPageToken; n != nil {
+		resp.NextPageToken = *n
 	}
 
 	return root.Annotations, resp, err
